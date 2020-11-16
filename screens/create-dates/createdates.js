@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import { Alert, Dimensions, StyleSheet, Text, View } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import { TouchableHighlight } from 'react-native-gesture-handler';
-// const API = process.env.REACT_APP_API;
 
 function createDates({ navigation }) {
     const [identification, setidentification] = useState();
@@ -15,7 +14,8 @@ function createDates({ navigation }) {
     const [phone, setphone] = useState();
     const createDates = async () => {
         try {
-            const res = await fetch("http://192.168.1.1:4000/DatePost", {
+            const res = await fetch('http://192.168.1.1:4000/DatePost',
+            {
                 method: "POST",
                 headers: {
                     Accept: "application/json",
@@ -32,7 +32,7 @@ function createDates({ navigation }) {
                 })
             });
             await res.json();
-            Alert.alert('Error:', error.message)
+            Alert.alert("Cita agendada exitosamente. ")
             navigation.goBack();
         } catch (error) {
             alert(error)
