@@ -15,11 +15,11 @@ function createDates({ navigation }) {
     const [phone, setphone] = useState();
     const createDates = async () => {
         try {
-            const res = await fetch("http://localhost:5000/DatePost", {
+            const res = await fetch("http://192.168.1.1:4000/DatePost", {
                 method: "POST",
                 headers: {
                     Accept: "application/json",
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json"  
                 },
                 body: JSON.stringify({
                     identification: identification,
@@ -38,8 +38,6 @@ function createDates({ navigation }) {
             alert(error)
         }
     }
-
-
 
     return (
         <View style={styles.container}>
@@ -83,5 +81,5 @@ const styles = StyleSheet.create({
         color: 'white'
     }
 });
-}
+
 export default createDates;
