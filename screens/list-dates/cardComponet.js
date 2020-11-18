@@ -2,12 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, TextInput, View } from 'react-native';
 
 
-function cardListDates(props){
-    const{identification,name} = props.dates;
+function CardComponent(props){
+  const {name,identification,lastname } = props.date;
     return (
         <View>
+            <Text>{name} {lastname}</Text>
             <Text>{identification}</Text>
-            <Text>{name}</Text>
+            
         </View>
     );
 };
@@ -28,4 +29,4 @@ const styles = StyleSheet.create({
   
   });
 
-export default cardListDates;
+export default CardComponent;

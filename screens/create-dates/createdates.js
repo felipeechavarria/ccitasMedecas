@@ -4,7 +4,7 @@ import { Alert, Dimensions, StyleSheet, Text, View } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import { TouchableHighlight } from 'react-native-gesture-handler';
 
-function createDates({ navigation }) {
+function CreateDates({ navigation }) {
     const [identification, setidentification] = useState();
     const [name, setname] = useState();
     const [lastname, setlastname] = useState();
@@ -14,7 +14,7 @@ function createDates({ navigation }) {
     const [phone, setphone] = useState();
     const createDates = async () => {
         try {
-            const res = await fetch('http://192.168.1.1:4000/DatePost',
+            const res = await fetch('http://192.168.1.6:4000/DatePost',
             {
                 method: "POST",
                 headers: {
@@ -82,4 +82,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default createDates;
+export default CreateDates;

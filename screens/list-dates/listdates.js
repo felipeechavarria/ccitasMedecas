@@ -1,34 +1,39 @@
 
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, TextInput, View } from 'react-native';
+import { Dimensions, StyleSheet, Text, TextInput, View } from 'react-native';
 import { FlatList, TouchableHighlight } from 'react-native-gesture-handler';
-// import cardListDates from "./cardComponet";
+import CardComponent from './cardComponet'
+import {useIsFocused} from '@react-navigation/native';
 
-function listDates({ navigation }) {
+function ListDates({ navigation }) {
+  const isFocused = useIsFocused();
   const [dates, setDates] = useState([]);
   const getDates = async () => {
-    let res = await fetch('http://192.168.1.1:4000/GetDates');
+    let res = await fetch('http://192.168.1.6:4000/GetDates');
     let json = await res.json();
     setDates(json);
+
   }
+  const detailsdates = (item)=>{
+    navigation.navigate('details',{dates:item});
+  } 
   useEffect(() => {
+    console.log("isFocused"+ isFocused)
     getDates();
-  }, []);
+  },[isFocused]);
   return (
     <View style={styles.container}>
       <TouchableHighlight style={styles.styleButton} onPress={() => navigation.navigate('create')}>
         <Text style={styles.textCreateButton}>Create Dates</Text>
       </TouchableHighlight>
-      <FlatList
-        data={dates}
-        renderItem={({ item }) => <TouchableHighlight>
-          <Text>laura</Text>
+      <FlatList data={dates}
+        renderItem={({ item }) => <TouchableHighlight onPress={() => detailsdates(item)} style={styles.listButton}>
+          <CardComponent date={item} />
         </TouchableHighlight>}
-        keyExtractor={item => item.id}
-      ></FlatList>
+        keyExtractor={item => item.id} />
 
     </View>
- 
+
   );
 }
 
@@ -36,17 +41,29 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    flexDirection: "column"
+    flexDirection: "column",
+    alignItems: "center"
   },
   styleButton: {
     backgroundColor: 'blue',
     padding: 15,
-    alignItems: 'center'
+    width: Dimensions.get('screen').width * 0.9,
+    alignItems:'center',
+    borderRadius:5,
+    marginTop:10
   },
   textCreateButton: {
     color: 'white'
+  },
+  listButton: {
+    marginTop: 5,
+    padding: 5,
+    borderColor: 'black',
+    borderRadius: 5,
+    borderWidth: 1,
+    width: Dimensions.get('screen').width * 0.9
   }
 
 });
 
-export default listDates;
+export default ListDates;
