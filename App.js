@@ -6,6 +6,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import CreateDates from './screens/create-dates/createdates';
 import DetailDates from './screens/detail-dates/detailDates';
 import ListDates from './screens/list-dates/listdates';
+import UpdateDates from './screens/update_dates/updateDates';
 
 const Stack = createStackNavigator();
 
@@ -16,6 +17,7 @@ function App() {
         <Stack.Screen name="Inicio" component={ListDates} />
         <Stack.Screen name="create" component={CreateDates} />
         <Stack.Screen name="details" component={DetailDates} />
+        <Stack.Screen name="Update" component={UpdateDates} />
       </Stack.Navigator>
     </NavigationContainer>
   );

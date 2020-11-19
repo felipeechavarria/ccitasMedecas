@@ -1,11 +1,28 @@
 import React, { useEffect, useState } from 'react';
-import { Dimensions, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Alert, Dimensions, StyleSheet, Text, TextInput, View } from 'react-native';
 import { TouchableHighlight } from 'react-native-gesture-handler';
 
 
 function DetailDates({ route, navigation }) {
     console.log(route.params.dates);
     const { name, identification, lastname, phone, neighborhood, birthdate, city, _id } = route.params.dates;
+    const deleteDates = async () => {
+        try {
+            const res = await fetch(`http://192.168.1.6:4000/Deletedate/${_id}`,
+                {
+                    method: "DELETE"
+                })
+            const data = await res.json();
+            console.log(data);
+            Alert.alert("La Cita a sido cancelada exitosamente. ")
+            navigation.goBack();
+        } catch (error) {
+            alert(error)
+        }
+    }
+    const updateDates =()=> {
+        navigation.navigate('Update',{dates: route.params.dates})
+    }
     return (
         <View style={styles.container}>
             <View style={styles.datailcard}>
@@ -16,10 +33,10 @@ function DetailDates({ route, navigation }) {
                 <Text>Ciudad: {city}</Text>
                 <Text>Barrio: {neighborhood}</Text>
                 <View style={styles.ButonView}>
-                    <TouchableHighlight  style={styles.EditCrud}>
+                    <TouchableHighlight  onPress={updateDates} style={styles.EditCrud}>
                         <Text style={styles.textCreateButton}>Modificar Cita</Text>
                     </TouchableHighlight>
-                    <TouchableHighlight  style={styles.ButonCrud}>
+                    <TouchableHighlight onPress={deleteDates} style={styles.ButonCrud} >
                         <Text style={styles.textCreateButton}>Cancelar Cita</Text>
                     </TouchableHighlight>
                 </View>
@@ -32,7 +49,7 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#fff',
         flexDirection: "column",
-        alignItems:'center',
+        alignItems: 'center',
     },
     styleButton: {
         backgroundColor: 'blue',
@@ -46,7 +63,7 @@ const styles = StyleSheet.create({
         borderColor: "black",
         borderRadius: 5,
         borderWidth: 1,
-        alignItems:'center',
+        alignItems: 'center',
         width: Dimensions.get('screen').width * 0.9
 
     },
@@ -61,9 +78,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         borderRadius: 5,
         marginTop: 10,
-        marginBottom:10,
-        marginLeft:4
-        
+        marginBottom: 10,
+        marginLeft: 4
+
     },
     EditCrud: {
         backgroundColor: 'grey',
@@ -72,8 +89,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         borderRadius: 5,
         marginTop: 10,
-        marginBottom:10,
-        marginRight:4
+        marginBottom: 10,
+        marginRight: 4
     },
     textCreateButton: {
         color: 'white'
