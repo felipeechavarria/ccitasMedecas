@@ -6,6 +6,7 @@ import { TouchableHighlight } from 'react-native-gesture-handler';
 function DetailDates({ route, navigation }) {
     console.log(route.params.dates);
     const { name, identification, lastname, phone, neighborhood, birthdate, city, _id } = route.params.dates;
+    // falta bonton de confirmar eliminacion
     const deleteDates = async () => {
         try {
             const res = await fetch(`http://192.168.1.6:4000/Deletedate/${_id}`,

@@ -24,7 +24,7 @@ function UpdateDates({route, navigation }) {
                     "Content-Type": "application/json"  
                 },
                 body: JSON.stringify({
-                    id:id,
+                    id:_id,
                     identification: identification,
                     name: name,
                     lastname: lastname,
@@ -35,7 +35,7 @@ function UpdateDates({route, navigation }) {
                 })
             });
             await res.json();
-            Alert.alert("Su cita fue agendadad nuevamente . ")
+            Alert.alert("Su cita fue agendadad nuevamente. ")
             navigation.navigate("Inicio");
         } catch (error) {
             alert(error)
