@@ -1,12 +1,12 @@
 
 import React, { useEffect, useState } from 'react';
-import { Alert, Dimensions, StyleSheet, Text, View } from 'react-native';
+import { Alert, Dimensions, ImageBackground, StyleSheet, Text, View } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import { TouchableHighlight } from 'react-native-gesture-handler';
-import { set } from 'react-native-reanimated';
 
-function UpdateDates({route, navigation }) {
-    const {_id } = route.params.dates;
+function UpdateDates({ route, navigation }) {
+    const image = { uri: 'https://image.freepik.com/foto-gratis/colorido-surtido-medicina-background_43058-360.jpg' };
+    const { _id } = route.params.dates;
     const [identification, setidentification] = useState();
     const [name, setname] = useState();
     const [lastname, setlastname] = useState();
@@ -17,23 +17,23 @@ function UpdateDates({route, navigation }) {
     const updateDates = async () => {
         try {
             const res = await fetch(`http://192.168.1.6:4000/PutDate/${_id}`,
-            {
-                method: "PUT",
-                headers: {
-                    Accept: "application/json",
-                    "Content-Type": "application/json"  
-                },
-                body: JSON.stringify({
-                    id:_id,
-                    identification: identification,
-                    name: name,
-                    lastname: lastname,
-                    birthdate: birthdate,
-                    city: city,
-                    neighborhood: neighborhood,
-                    phone: phone,
-                })
-            });
+                {
+                    method: "PUT",
+                    headers: {
+                        Accept: "application/json",
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        id: _id,
+                        identification: identification,
+                        name: name,
+                        lastname: lastname,
+                        birthdate: birthdate,
+                        city: city,
+                        neighborhood: neighborhood,
+                        phone: phone,
+                    })
+                });
             await res.json();
             Alert.alert("Su cita fue agendadad nuevamente. ")
             navigation.navigate("Inicio");
@@ -49,20 +49,22 @@ function UpdateDates({route, navigation }) {
         setcity(route.params.dates.city);
         setneighborhood(route.params.dates.neighborhood);
         setphone(route.params.dates.phone)
-      },[]);
+    }, []);
 
     return (
         <View style={styles.container}>
-            <TextInput style={styles.textInput} value= {identification} onChangeText={text => setidentification(text)} placeholder="Identificacion"></TextInput>
-            <TextInput style={styles.textInput} value= {name} onChangeText={text => setname(text)} placeholder="Nombre"></TextInput>
-            <TextInput style={styles.textInput} value= {lastname} onChangeText={text => setlastname(text)} placeholder="Apellido"></TextInput>
-            <TextInput style={styles.textInput} value= {birthdate} onChangeText={text => setbirthdate(text)} placeholder="Fecha de nacimiento"></TextInput>
-            <TextInput style={styles.textInput} value= {city} onChangeText={text => setcity(text)} placeholder="Ciudad"></TextInput>
-            <TextInput style={styles.textInput} value= {neighborhood} onChangeText={text => setneighborhood(text)} placeholder="Barrio"></TextInput>
-            <TextInput style={styles.textInput} value= {phone} onChangeText={text => setphone(text)} placeholder="Telefono"></TextInput>
-            <TouchableHighlight style={styles.styleButton} onPress={updateDates} >
-                <Text style={styles.textCreateButton}>Actualizar Cita</Text>
-            </TouchableHighlight>
+            <ImageBackground source={image} style={styles.image}>
+                <TextInput style={styles.textInput} value={identification} onChangeText={text => setidentification(text)} placeholder="Identificacion"></TextInput>
+                <TextInput style={styles.textInput} value={name} onChangeText={text => setname(text)} placeholder="Nombre"></TextInput>
+                <TextInput style={styles.textInput} value={lastname} onChangeText={text => setlastname(text)} placeholder="Apellido"></TextInput>
+                <TextInput style={styles.textInput} value={birthdate} onChangeText={text => setbirthdate(text)} placeholder="Fecha de nacimiento"></TextInput>
+                <TextInput style={styles.textInput} value={city} onChangeText={text => setcity(text)} placeholder="Ciudad"></TextInput>
+                <TextInput style={styles.textInput} value={neighborhood} onChangeText={text => setneighborhood(text)} placeholder="Barrio"></TextInput>
+                <TextInput style={styles.textInput} value={phone} onChangeText={text => setphone(text)} placeholder="Telefono"></TextInput>
+                <TouchableHighlight style={styles.styleButton} onPress={updateDates} >
+                    <Text style={styles.textCreateButton}>Modificar Cita</Text>
+                </TouchableHighlight>
+            </ImageBackground>
         </View>
     );
 }
@@ -80,18 +82,28 @@ const styles = StyleSheet.create({
         borderColor: 'black',
         borderRadius: 5,
         borderWidth: 1,
-        width: Dimensions.get('screen').width * 0.9
+        width: Dimensions.get('screen').width * 0.9,
+        backgroundColor: "white"
     },
     styleButton: {
-        backgroundColor: 'grey',
+        backgroundColor: '#6336C2',
         padding: 15,
         alignItems: 'center',
         marginTop: 10,
-        borderRadius: 20
+        borderRadius: 80,
+        width: Dimensions.get('screen').width * 0.9,
     },
     textCreateButton: {
         color: 'white'
-    }
+    },
+    image: {
+        flex: 1,
+        resizeMode: 'cover',
+        justifyContent: 'center',
+        width: Dimensions.get('screen').width * 1,
+        alignItems: 'center',
+
+    },
 });
 
 export default UpdateDates;

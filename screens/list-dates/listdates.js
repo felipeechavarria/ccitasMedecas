@@ -1,11 +1,12 @@
 
 import React, { useEffect, useState } from 'react';
-import { Dimensions, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Dimensions, ImageBackground, StyleSheet, Text, TextInput, View } from 'react-native';
 import { FlatList, TouchableHighlight } from 'react-native-gesture-handler';
 import CardComponent from './cardComponet'
-import {useIsFocused} from '@react-navigation/native';
+import { useIsFocused } from '@react-navigation/native';
 
 function ListDates({ navigation }) {
+  const image = { uri: 'https://image.freepik.com/foto-gratis/colorido-surtido-medicina-background_43058-360.jpg' };
   const isFocused = useIsFocused();
   const [dates, setDates] = useState([]);
   const getDates = async () => {
@@ -14,23 +15,25 @@ function ListDates({ navigation }) {
     setDates(json);
 
   }
-  const detailsdates = (item)=>{
-    navigation.navigate('details',{dates:item});
-  } 
+  const detailsdates = (item) => {
+    navigation.navigate('Cita', { dates: item });
+  }
   useEffect(() => {
-    console.log("isFocused"+ isFocused)
+    console.log("isFocused" + isFocused)
     getDates();
-  },[isFocused]);
+  }, [isFocused]);
   return (
     <View style={styles.container}>
-      <TouchableHighlight style={styles.styleButton} onPress={() => navigation.navigate('create')}>
-        <Text style={styles.textCreateButton}>Create Dates</Text>
+      <ImageBackground source={image} style={styles.image}>
+      <TouchableHighlight style={styles.styleButton} onPress={() => navigation.navigate('Agendar Cita')}>
+        <Text style={styles.textCreateButton}>Agendar Cita</Text>
       </TouchableHighlight>
       <FlatList data={dates}
         renderItem={({ item }) => <TouchableHighlight onPress={() => detailsdates(item)} style={styles.listButton}>
           <CardComponent date={item} />
         </TouchableHighlight>}
-        keyExtractor={item => item.id} />
+        keyExtractor={item => item._id.toString()} />
+        </ImageBackground>
 
     </View>
 
@@ -40,20 +43,22 @@ function ListDates({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#C0F7F8',
     flexDirection: "column",
     alignItems: "center"
   },
   styleButton: {
-    backgroundColor: 'blue',
+    backgroundColor: '#6336C2',
     padding: 15,
     width: Dimensions.get('screen').width * 0.9,
-    alignItems:'center',
-    borderRadius:5,
-    marginTop:10
+    alignItems: 'center',
+    borderRadius: 80,
+    marginTop:20,
+    marginBottom:10
   },
   textCreateButton: {
-    color: 'white'
+    color: 'white',
+    alignItems: 'center'
   },
   listButton: {
     marginTop: 5,
@@ -61,8 +66,18 @@ const styles = StyleSheet.create({
     borderColor: 'black',
     borderRadius: 5,
     borderWidth: 1,
-    width: Dimensions.get('screen').width * 0.9
-  }
+    width: Dimensions.get('screen').width * 0.9,
+    backgroundColor: "white",
+    alignItems: 'center',
+  },
+  image: {
+    flex: 1,
+    resizeMode: 'cover',
+    justifyContent: 'center',
+    width: Dimensions.get('screen').width * 1,
+    alignItems: 'center',
+   
+  },
 
 });
 

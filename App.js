@@ -14,10 +14,10 @@ function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Inicio" component={ListDates} />
-        <Stack.Screen name="create" component={CreateDates} />
-        <Stack.Screen name="details" component={DetailDates} />
-        <Stack.Screen name="Update" component={UpdateDates} />
+        <Stack.Screen  style={styles.container} name="Inicio" component={ListDates} />
+        <Stack.Screen  style={styles.container} name="Agendar Cita" component={CreateDates} />
+        <Stack.Screen  style={styles.container} name="Cita" component={DetailDates} />
+        <Stack.Screen  style={styles.container} name="Modificar Cita" component={UpdateDates} />
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -26,9 +26,9 @@ function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#C0F7F8',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
 });
 
