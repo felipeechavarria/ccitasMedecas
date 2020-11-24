@@ -22,7 +22,7 @@ function CreateDates({ navigation }) {
             Alert.alert("el telefono debe tener 10 digitos")
         }
         else {
-            const res = await fetch('http://192.168.1.6:4000/DatePost',
+            const res = await fetch('http://192.168.1.:4000/DatePost',
                 {
                     method: "POST",
                     headers: {

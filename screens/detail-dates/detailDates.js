@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Alert, Dimensions, ImageBackground, StyleSheet, Text, TextInput, View,Image } from 'react-native';
+import { Alert, Dimensions, ImageBackground, StyleSheet, Text, TextInput, View, Image } from 'react-native';
 import { TouchableHighlight } from 'react-native-gesture-handler';
 
 
@@ -26,7 +26,7 @@ function DetailDates({ route, navigation }) {
     };
     const deletedates = async () => {
         try {
-            const res = await fetch(`http://192.168.1.6:4000/Deletedate/${_id}`,
+            const res = await fetch(`http://192.168.1.17:4000/Deletedate/${_id}`,
                 {
                     method: "DELETE"
                 })
@@ -41,7 +41,7 @@ function DetailDates({ route, navigation }) {
     const updateDates = () => {
         navigation.navigate('Modificar Cita', { dates: route.params.dates })
     }
-    
+
     return (
         <View style={styles.container}>
             <ImageBackground source={image} style={styles.image}>
@@ -61,7 +61,24 @@ function DetailDates({ route, navigation }) {
                         </TouchableHighlight>
                     </View>
                 </View>
-                {/* <Image source={require('.../assets/z.jpg')}/> */}
+                <View style={styles.contdoc1}>
+                    <View style={styles.textdoc}>
+                        {/* <Text style={styles.textdoc}>Su cita fue agendada </Text> */}
+                        <Text style={styles.textdoc}>Su profecional de</Text>
+                        <Text style={styles.textdoc}> Confianza</Text>
+                    </View>
+                    <View style={styles.contdoc}>
+                        <View style={styles.textdoc}>
+                            <Text style={styles.textdoc}>Doctor </Text>
+                            <Text style={styles.textdoc}>Juan Zabala </Text>
+                            <Text style={styles.textdoc}>Urologo</Text>
+                        </View>
+                        <Image
+                            source={require('./z.jpg')}
+                            style={styles.doc}
+                        />
+                    </View>
+                </View>
             </ImageBackground>
         </View>
     );
@@ -87,9 +104,9 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         alignItems: 'center',
         width: Dimensions.get('screen').width * 0.9,
-        backgroundColor:"#FADADA",
-        color:"white",
-        marginTop:50
+        backgroundColor: "#FADADA",
+        color: "white",
+        marginTop: 50
     },
     ButonView: {
         flexDirection: 'row',
@@ -120,13 +137,41 @@ const styles = StyleSheet.create({
         color: 'white'
     },
     image: {
-      flex: 1,
-      resizeMode: 'cover',
-    //   justifyContent: 'center',
-      width: Dimensions.get('screen').width * 1,
-      alignItems: 'center'
-     
+        flex: 1,
+        resizeMode: 'cover',
+        //   justifyContent: 'center',
+        width: Dimensions.get('screen').width * 1,
+        alignItems: 'center'
+
     },
+    doc: {
+        width: 80,
+        height: 80,
+        borderRadius: 40
+    },
+    contdoc: {
+        flexDirection: "row"
+    },
+    contdoc1: {
+        flexDirection: "column",
+        marginTop: 80,
+        marginLeft: 100,
+        width: Dimensions.get('screen').width * 0.55,
+        backgroundColor: "#FADADA",
+        borderRadius: 10,
+        alignItems: 'center',
+        justifyContent: 'center'
+
+    },
+    textdoc: {
+        backgroundColor: "#FADADA",
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: 10,
+        marginRight: 10
+
+
+    }
 });
 
 export default DetailDates;

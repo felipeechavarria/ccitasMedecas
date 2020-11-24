@@ -16,7 +16,7 @@ function UpdateDates({ route, navigation }) {
     const [phone, setphone] = useState();
     const updateDates = async () => {
         try {
-            const res = await fetch(`http://192.168.1.6:4000/PutDate/${_id}`,
+            const res = await fetch(`http://192.168.1.17:4000/PutDate/${_id}`,
                 {
                     method: "PUT",
                     headers: {

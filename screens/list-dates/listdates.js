@@ -10,7 +10,7 @@ function ListDates({ navigation }) {
   const isFocused = useIsFocused();
   const [dates, setDates] = useState([]);
   const getDates = async () => {
-    let res = await fetch('http://192.168.1.6:4000/GetDates');
+    let res = await fetch('http://192.168.1.17:4000/GetDates');
     let json = await res.json();
     setDates(json);
 
