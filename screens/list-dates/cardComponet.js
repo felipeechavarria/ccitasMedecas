@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Linking, StyleSheet, Text, TextInput, View } from 'react-native';
-import { TouchableHighlight } from 'react-native-gesture-handler';
+
 
 
 function CardComponent(props) {

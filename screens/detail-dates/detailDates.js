@@ -62,11 +62,6 @@ function DetailDates({ route, navigation }) {
                     </View>
                 </View>
                 <View style={styles.contdoc1}>
-                    <View style={styles.textdoc}>
-                        {/* <Text style={styles.textdoc}>Su cita fue agendada </Text> */}
-                        <Text style={styles.textdoc}>Su profecional de</Text>
-                        <Text style={styles.textdoc}> Confianza</Text>
-                    </View>
                     <View style={styles.contdoc}>
                         <View style={styles.textdoc}>
                             <Text style={styles.textdoc}>Doctor </Text>
