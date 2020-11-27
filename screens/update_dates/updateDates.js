@@ -7,15 +7,21 @@ import { TouchableHighlight } from 'react-native-gesture-handler';
 function UpdateDates({ route, navigation }) {
     const image = { uri: 'https://image.freepik.com/foto-gratis/colorido-surtido-medicina-background_43058-360.jpg' };
     const { _id } = route.params.dates;
-    const [identification, setidentification] = useState();
-    const [name, setname] = useState();
-    const [lastname, setlastname] = useState();
-    const [birthdate, setbirthdate] = useState();
-    const [city, setcity] = useState();
-    const [neighborhood, setneighborhood] = useState();
-    const [phone, setphone] = useState();
+    const [identification, setidentification] = useState("");
+    const [name, setname] = useState("");
+    const [lastname, setlastname] = useState("");
+    const [birthdate, setbirthdate] = useState("");
+    const [city, setcity] = useState("");
+    const [neighborhood, setneighborhood] = useState("");
+    const [phone, setphone] = useState("");
     const updateDates = async () => {
-        try {
+        if (name.length < 1 || identification.length < 1 || lastname.length < 1 || birthdate.length < 1 || city.length < 1 || neighborhood.length < 1 || phone.length < 1) {
+            Alert.alert("No debe haber ningun campo vacio ")
+
+        } else if (phone.length < 10) {
+            Alert.alert("El telefono debe contener 10 digitos")
+        }
+        else {
             const res = await fetch(`http://192.168.1.17:4000/PutDate/${_id}`,
                 {
                     method: "PUT",
@@ -35,10 +41,8 @@ function UpdateDates({ route, navigation }) {
                     })
                 });
             await res.json();
-            Alert.alert("Su cita fue agendadad nuevamente. ")
+            Alert.alert("Modificacion exitosa. ")
             navigation.navigate("Inicio");
-        } catch (error) {
-            alert(error)
         }
     }
     useEffect(() => {
@@ -54,13 +58,13 @@ function UpdateDates({ route, navigation }) {
     return (
         <View style={styles.container}>
             <ImageBackground source={image} style={styles.image}>
-                <TextInput style={styles.textInput} value={identification} onChangeText={text => setidentification(text)} placeholder="Identificacion"></TextInput>
+                <TextInput keyboardType="numeric" style={styles.textInput} value={identification} onChangeText={text => setidentification(text)} placeholder="Identificacion"></TextInput>
                 <TextInput style={styles.textInput} value={name} onChangeText={text => setname(text)} placeholder="Nombre"></TextInput>
                 <TextInput style={styles.textInput} value={lastname} onChangeText={text => setlastname(text)} placeholder="Apellido"></TextInput>
                 <TextInput style={styles.textInput} value={birthdate} onChangeText={text => setbirthdate(text)} placeholder="Fecha de nacimiento"></TextInput>
                 <TextInput style={styles.textInput} value={city} onChangeText={text => setcity(text)} placeholder="Ciudad"></TextInput>
                 <TextInput style={styles.textInput} value={neighborhood} onChangeText={text => setneighborhood(text)} placeholder="Barrio"></TextInput>
-                <TextInput style={styles.textInput} value={phone} onChangeText={text => setphone(text)} placeholder="Telefono"></TextInput>
+                <TextInput keyboardType="numeric" maxLength={10} style={styles.textInput} value={phone} onChangeText={text => setphone(text)} placeholder="Telefono"></TextInput>
                 <TouchableHighlight style={styles.styleButton} onPress={updateDates} >
                     <Text style={styles.textCreateButton}>Modificar Cita</Text>
                 </TouchableHighlight>

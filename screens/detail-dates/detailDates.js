@@ -15,11 +15,11 @@ function DetailDates({ route, navigation }) {
             "Requerimos su confirmacion para Cancelar esta Cita ",
             [
                 {
-                    text: "Cancelar",
+                    text: "NO",
                     onPress: () => console.log("Cancel Pressed"),
                     style: "cancel"
                 },
-                { text: "OK", onPress: () => deletedates() }
+                { text: "SI", onPress: () => deletedates() }
             ],
             { cancelable: false }
         )

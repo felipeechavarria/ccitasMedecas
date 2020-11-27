@@ -10,7 +10,7 @@ function ListDates({ navigation }) {
   const isFocused = useIsFocused();
   const [dates, setDates] = useState([]);
   const getDates = async () => {
-    let res = await fetch('http://192.168.1.17:4000/GetDates');
+    let res = await fetch('http:/192.168.1.17:4000/GetDates');
     let json = await res.json();
     setDates(json);
 
@@ -25,15 +25,15 @@ function ListDates({ navigation }) {
   return (
     <View style={styles.container}>
       <ImageBackground source={image} style={styles.image}>
-      <TouchableHighlight style={styles.styleButton} onPress={() => navigation.navigate('Agendar Cita')}>
-        <Text style={styles.textCreateButton}>Agendar Cita</Text>
-      </TouchableHighlight>
-      <FlatList data={dates}
-        renderItem={({ item }) => <TouchableHighlight onPress={() => detailsdates(item)} style={styles.listButton}>
-          <CardComponent date={item} />
-        </TouchableHighlight>}
-        keyExtractor={item => item._id.toString()} />
-        </ImageBackground>
+        <TouchableHighlight style={styles.styleButton} onPress={() => navigation.navigate('Agendar Cita')}>
+          <Text style={styles.textCreateButton}>Agendar Cita</Text>
+        </TouchableHighlight>
+        <FlatList data={dates}
+          renderItem={({ item }) => <TouchableHighlight onPress={() => detailsdates(item)} style={styles.listButton}>
+            <CardComponent date={item} />
+          </TouchableHighlight>}
+          keyExtractor={item => item._id.toString()} />
+      </ImageBackground>
 
     </View>
 
@@ -53,8 +53,8 @@ const styles = StyleSheet.create({
     width: Dimensions.get('screen').width * 0.9,
     alignItems: 'center',
     borderRadius: 80,
-    marginTop:20,
-    marginBottom:10
+    marginTop: 20,
+    marginBottom: 10
   },
   textCreateButton: {
     color: 'white',
@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: Dimensions.get('screen').width * 1,
     alignItems: 'center',
-   
+
   },
 
 });
